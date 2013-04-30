@@ -3,7 +3,7 @@
 //     Underscore.math is freely distributable under the MIT license.
 //     Portions of Underscore.math are inspired or borrowed from MooTools Array.Math,
 //     http://github.com/syntagmatic/underscore.math
-//     
+//
 //     Requires Underscore.js
 //     http://underscorejs.org/
 
@@ -22,7 +22,7 @@
   //   => 2.5
   //   TODO {}, [{}]
   math.median = function(arr) {
-    var arr = arr.slice(0); // create copy
+    arr = arr.slice(0); // create copy
     var middle = (arr.length + 1) /2;
     var sorted = math.sort(arr);
     return (sorted.length % 2) ? sorted[middle - 1] : (sorted[middle - 1.5] + sorted[middle - 0.5]) / 2;
@@ -42,7 +42,7 @@
   // math.scale(1,[2,5,10])
   //   => [ 0.2, 0.5, 1]
   math.scale = function(arr, max) {
-    var max = max || 1;
+    max = max || 1;
     var max0 = _.max(arr);
     return _.map(arr, function(i) { return i * (max/max0); });
   };
@@ -73,11 +73,12 @@
   // math.sum([{b: 4},{b: 5},{b: 6}], 'b')
   //   => 15
   math.sum = function(obj, key) {
+    var arr;
     if (_.isArray(obj) && typeof obj[0] === 'number') {
-      var arr = obj;
+      arr = obj;
     } else {
-      var key = key || 'value';
-      var arr = _(obj).pluck(key);
+      key = key || 'value';
+      arr = _(obj).pluck(key);
     }
     var val = 0;
     for (var i=0, len = arr.length; i<len; i++)
@@ -97,7 +98,7 @@
     });
     return trans;
   };
- 
+
   // math.variance([1,2,3])
   //   => 2/3
   math.variance = function(arr) {
@@ -105,20 +106,20 @@
     var variance = function(x) { return _(x-mean).pow(2); };
     return _(arr).chain().map(variance).mean().value();
   };
-  
+
   // Standard score, assuming normal distribution
   // math.zscore([1,2,3])
   //   => [-1.224744871391589, 0, 1.224744871391589]
   math.zscore = function(obj, key) {
+    var arr;
     if (_.isArray(obj) && typeof obj[0] === 'number') {
-      var arr = obj;
+      arr = obj;
     } else {
-      var key = key || 'value';
-      var arr = _(obj).pluck(key);
+      key = key || 'value';
+      arr = _(obj).pluck(key);
     }
 
-    var n = arr.length,
-        mean = _(arr).mean(),
+    var mean = _(arr).mean(),
         sigma = _(arr).stdDeviation();
     var zscore = function(d) { return (d-mean)/sigma; };
     return _(arr).map(zscore);
@@ -131,12 +132,12 @@
     for(i = size-1; i <= arr.length; i++) {
       win = arr.slice(i-size, i);
       if (win.length === size) {
-        newarr.push(_.mean(win)); 
+        newarr.push(_.mean(win));
       }
     }
     return newarr;
   };
-  
+
   // add methods to Underscore.js namespace
   _.mixin(math);
 
