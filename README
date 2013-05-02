@@ -1,6 +1,21 @@
+Javascript math operations on collections, based on Mootools Array.Math: http://mootools.net/forge/p/array_math but without extending native prototypes.
+
+Provides the following methods:
+
+- average (mean)
+- median
+- movingAverage
+- power
+- scale
+- slope
+- sort
+- stdDeviation (sigma)
+- sum
+- transpose
+- variance
+- zscore
+
 Copyright 2011 Kai Chang
 Released under MIT license
 
-Contributions by Irene Ros.
-
-Javascript math, based on Mootools Array.Math: http://mootools.net/forge/p/array_math without extending native prototypes.
+Contributions by Irene Ros and Bruno Heridet.
