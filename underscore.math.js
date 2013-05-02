@@ -23,15 +23,15 @@
   //   TODO {}, [{}]
   math.median = function(arr) {
     arr = arr.slice(0); // create copy
-    var middle = (arr.length + 1) /2;
-    var sorted = math.sort(arr);
+    var middle = (arr.length + 1) / 2,
+      sorted = math.sort(arr);
     return (sorted.length % 2) ? sorted[middle - 1] : (sorted[middle - 1.5] + sorted[middle - 0.5]) / 2;
   };
 
   // Power, exponent
   // math.pow(2,3)
   //   => 8
-  math.pow = function(x, n) {
+  math.pow = math.power = function(x, n) {
      if (_.isNumber(x))
         return Math.pow(x, n);
      if (_.isArray(x))
@@ -51,7 +51,7 @@
   // math.slope([0,0],[1,2])
   //   => 2
   math.slope = function(x, y) {
-    return (y[1] - x[1]) / (y[0]-x[0]);
+    return (y[1] - x[1]) / (y[0] - x[0]);
   };
 
   // Numeric sort
@@ -80,8 +80,8 @@
       key = key || 'value';
       arr = _(obj).pluck(key);
     }
-    var val = 0;
-    for (var i=0, len = arr.length; i<len; i++)
+    var val = 0, i;
+    for (i=0; i<arr.length; i++)
       val += (arr[i]-0);
     return val;
   };
@@ -102,8 +102,8 @@
   // math.variance([1,2,3])
   //   => 2/3
   math.variance = function(arr) {
-    var mean = _(arr).mean();
-    var variance = function(x) { return _(x-mean).pow(2); };
+    var mean = _(arr).mean(),
+      variance = function(x) { return _(x-mean).pow(2); };
     return _(arr).chain().map(variance).mean().value();
   };
 
@@ -120,14 +120,14 @@
     }
 
     var mean = _(arr).mean(),
-        sigma = _(arr).stdDeviation();
-    var zscore = function(d) { return (d-mean)/sigma; };
+        sigma = _(arr).stdDeviation(),
+        zscore = function(d) { return (d-mean)/sigma; };
     return _(arr).map(zscore);
   };
 
   // math.movingAvg([1,2,3,4,5], 3);
   //   => [2,3,4]
-  math.movingAvg = function(arr, size) {
+  math.movingAvg = math.movingAverage = function(arr, size) {
     var win, i, newarr = [];
     for(i = size-1; i <= arr.length; i++) {
       win = arr.slice(i-size, i);
